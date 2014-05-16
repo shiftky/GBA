@@ -11,13 +11,13 @@ crt.o: crt.S
 main.o: main.c
 	$(GCC) -c main.c
 
-box.o: box.c
+box.o: gba.h box.h box.c
 	$(GCC) -c box.c
 
-ball.o: ball.c
+ball.o: gba.h box.h ball.h ball.c
 	$(GCC) -c ball.c
 
-racket.o: racket.c
+racket.o: gba.h box.h ball.h racket.h racket.c
 	$(GCC) -c racket.c
 
 main.bin: main.o crt.o box.o ball.o racket.o

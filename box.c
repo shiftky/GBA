@@ -28,3 +28,12 @@ void move_box(struct box *b, int x, int y, hword color)
   draw_box(b, b->x, b->y, COLOR_BLACK);
   draw_box(b, x, y, color);
 }
+
+int cross(struct box *b1, struct box *b2)
+{
+  if ( (b1->x <= b2->x+b2->width && b1->x+b1->width >= b2->x) && (b1->y <= b2->y+b2->height && b1->y+b1->height >= b2->y) ) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
