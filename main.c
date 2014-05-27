@@ -2,6 +2,8 @@
 #include "ball.h"
 #include "racket.h"
 
+#define INTERVAL 200
+
 void wait(int val) {
   int i, j;
   for (i = 0; i < val; i++)
@@ -22,11 +24,10 @@ int main(void)
   gba_register(TMR_CTRL0) = TMR_ENABLE + TMR_1024CLOCK;
 
   while (1) {
-    racket_step();
     ball_step();
-    ball_step2();
-    ball_step3();
-    delay(200);
+    racket_step();
+    game_step();
+    delay(INTERVAL);
   }
 
   return 0;

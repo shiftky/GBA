@@ -15,7 +15,7 @@ main.o: main.c
 box.o: gba.h box.h box.c
 	$(GCC) -c box.c
 
-ball.o: gba.h box.h ball.h ball.c
+ball.o: gba.h game.h box.h ball.h ball.c
 	$(GCC) -c ball.c
 
 racket.o: gba.h box.h ball.h racket.h racket.c
