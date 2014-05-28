@@ -11,18 +11,17 @@ void game_step(void)
 {
   switch ( game_get_state() ) {
     case START:
-      draw_string("IMAGINE THE FUTURE.", 45, 70, COLOR_WHITE);
       break;
 
     case RUNNING:
       break;
 
     case DEAD:
-      draw_string("GAME OVER", 85, 50, COLOR_WHITE);
+      draw_string("GAME OVER", 85, 70, COLOR_WHITE);
       break;
 
     case CLEAR:
-      draw_string("CLEAR", 100, 50, COLOR_WHITE);
+      draw_string("CLEAR", 100, 70, COLOR_WHITE);
       break;
 
     case RESTART:

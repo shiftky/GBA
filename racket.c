@@ -5,21 +5,30 @@
 #include "racket.h"
 #include "utils.h"
 
-#define INIT_X    30
+#define INIT_X    100
 #define INIT_Y    130
 #define RACKET_H  4
 #define RACKET_W  35
 #define DISTANCE  4
 
-static struct box racket = { INIT_X, INIT_Y, RACKET_W, RACKET_H };
-static int racket_x = INIT_X, racket_y = INIT_Y;
+static struct box racket;
+static int racket_x, racket_y;
+
+static void init_racket(void)
+{
+  racket_x = racket.x = INIT_X;
+  racket_y = racket.y = INIT_Y;
+  racket.width = RACKET_W;
+  racket.height = RACKET_H;
+  draw_box(&racket, racket.x, racket.y, COLOR_WHITE);
+}
 
 void racket_step(void)
 {
   switch ( game_get_state() ) {
     case START:
+      init_racket();
       if ( get_key_state(KEY_START) ) {
-        init_screen();
         game_set_state(RUNNING);
       }
       break;

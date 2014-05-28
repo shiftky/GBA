@@ -19,13 +19,18 @@ static struct box block = { 50, 15, 25, 10 };
 static struct box block2 = { 100, 15, 25, 10 };
 static int box_cnt = 2;
 
-void delete_block(struct box *block)
+static int hit(int x, int y)
+{
+  return flags[x/BLOCK_WIDTH][(y-BLOCK_TOP)/BLOCK_HEIGHT];
+}
+
+static void delete_block(struct box *block)
 {
   draw_box(block, block->x, block->y, COLOR_BLACK);
   block->x = block->y = block->width = block->height = 0;
 }
 
-void init_block(void)
+static void init_block(void)
 {
   int i, j;
   num_blocks = BLOCK_COLS * BLOCK_ROWS;
@@ -43,27 +48,22 @@ void init_block(void)
 
 void block_step(void)
 {
+  int x, y;
   switch ( game_get_state() ) {
     case START:
       init_block();
       break;
 
     case RUNNING:
-      draw_box(&block, block.x, block.y, COLOR_WHITE);
-      draw_box(&block2, block2.x, block2.y, COLOR_WHITE);
-
-      if ( cross( ball_get_box(), &block ) == 1 ) {
-        delete_block(&block);
-        ball_set_dy(-1 * ball_get_dy());
-        box_cnt--;
-      }
-      if ( cross( ball_get_box(), &block2 ) == 1 ) {
-        delete_block(&block2);
-        ball_set_dy(-1 * ball_get_dy());
-        box_cnt--;
+      x = ball_get_box()->x;
+      y = ball_get_box()->y;
+      if ( hit(x, y) == 1 ) {
+        flags[x/BLOCK_WIDTH][(y-BLOCK_TOP)/BLOCK_HEIGHT] = 0;
+        draw_box(&boxes[x/BLOCK_WIDTH][(y-BLOCK_TOP)/BLOCK_HEIGHT], boxes[x/BLOCK_WIDTH][(y-BLOCK_TOP)/BLOCK_HEIGHT].x, boxes[x/BLOCK_WIDTH][(y-BLOCK_TOP)/BLOCK_HEIGHT].y, COLOR_BLACK);
+        num_blocks--;
       }
 
-      if ( box_cnt <= 0 ) {
+      if ( num_blocks <= 0 ) {
         game_set_state(CLEAR);
       }
       break;
