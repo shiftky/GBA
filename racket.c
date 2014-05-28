@@ -5,12 +5,10 @@
 #include "racket.h"
 #include "utils.h"
 
-//#define INIT_X    100
-#define INIT_X    0
+#define INIT_X    100
 #define INIT_Y    130
 #define RACKET_H  4
-//#define RACKET_W  35
-#define RACKET_W  LCD_WIDTH
+#define RACKET_W  35
 #define DISTANCE  4
 
 static struct box racket;
@@ -52,6 +50,10 @@ void racket_step(void)
       }
 
       move_box(&racket, racket_x, racket_y, COLOR_WHITE);
+      break;
+
+    case RESTART:
+      init_racket();
       break;
   }
 }

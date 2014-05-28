@@ -30,7 +30,7 @@ void game_step(void)
       draw_string("PRESS START KEY TO RESTART.", 16, 85, COLOR_WHITE);
       if ( get_key_state(KEY_START) ) {
         init_screen();
-        game_set_state(START);
+        game_set_state(RESTART);
       }
       break;
 
@@ -44,6 +44,7 @@ void game_step(void)
       break;
 
     case RESTART:
+      game_set_state(RUNNING);
       break;
   }
 }

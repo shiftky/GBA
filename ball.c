@@ -11,7 +11,7 @@ int ball_get_dy(void) { return dy; }
 void ball_set_dy(int new_dy) { dy = new_dy; }
 struct box *ball_get_box(void) { return &ball; }
 
-static void ball_init(void)
+static void init_ball(void)
 {
   ball.x = old_x = ball.y = old_y = 100;
   ball.width = ball.height = 5;
@@ -24,7 +24,7 @@ void ball_step(void)
 
   switch ( game_get_state() ) {
     case START:
-      ball_init();
+      init_ball();
       break;
 
     case RUNNING:
@@ -45,6 +45,10 @@ void ball_step(void)
       }
       move_box(&ball, x, y, COLOR_WHITE);
       old_x = x; old_y = y;
+      break;
+
+    case RESTART:
+      init_ball();
       break;
   }
 }

@@ -71,5 +71,9 @@ void block_step(void)
         game_set_state(CLEAR);
       }
       break;
+
+    case RESTART:
+      init_block();
+      break;
   }
 }
