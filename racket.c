@@ -30,9 +30,6 @@ void racket_step(void)
   switch ( game_get_state() ) {
     case START:
       init_racket();
-      if ( get_key_state(KEY_START) ) {
-        game_set_state(RUNNING);
-      }
       break;
 
     case RUNNING:
@@ -55,20 +52,6 @@ void racket_step(void)
       }
 
       move_box(&racket, racket_x, racket_y, COLOR_WHITE);
-      break;
-
-    case DEAD:
-      if ( get_key_state(KEY_START) ) {
-        init_screen();
-        game_set_state(START);
-      }
-      break;
-
-    case RESTART:
-      game_set_state(RUNNING);
-      break;
-
-    case CLEAR:
       break;
   }
 }
