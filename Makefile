@@ -12,17 +12,26 @@ crt.o: crt.S
 main.o: main.c
 	$(GCC) -c main.c
 
-box.o: gba.h box.h box.c
+utils.o: gba.h utils.h utils.c
+	$(GCC) -c utils.c
+
+game.o: gba.h utils.h game.h game.c
+	$(GCC) -c game.c
+
+box.o: gba.h utils.h box.h box.c
 	$(GCC) -c box.c
 
-ball.o: gba.h box.h ball.h ball.c
+ball.o: gba.h utils.h game.h box.h ball.h ball.c
 	$(GCC) -c ball.c
 
-racket.o: gba.h box.h ball.h racket.h racket.c
+racket.o: gba.h utils.h game.h box.h ball.h racket.h racket.c
 	$(GCC) -c racket.c
 
-main.mb: main.o crt.o box.o ball.o racket.o
-	$(LD) -o main.out -T gcc.ls crt.o box.o ball.o racket.o main.o
+block.o: gba.h block.h block.c
+	$(GCC) -c block.c
+
+main.mb: main.o crt.o utils.o game.o box.o ball.o racket.o block.o
+	$(LD) -o main.out -T gcc.ls crt.o utils.o game.o box.o ball.o racket.o block.o main.o
 	$(OBJCOPY) -O binary main.out main.mb
 
 clean:
