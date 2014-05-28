@@ -5,7 +5,7 @@
 #include "block.h"
 #include "utils.h"
 
-static struct box block = { 10, 10, 25, 10 };
+static struct box block = { 100, 15, 25, 10 };
 
 void block_step(void)
 {
@@ -14,7 +14,11 @@ void block_step(void)
       break;
 
     case RUNNING:
-      draw_box(&block, 15, 15, COLOR_WHITE);
+      draw_box(&block, block.x, block.y, COLOR_WHITE);
+      if ( cross( ball_get_box(), &block ) == 1 ) {
+        draw_box(&block, block.x, block.y, COLOR_BLACK);
+        game_set_state(CLEAR);
+      }
       break;
   }
 }

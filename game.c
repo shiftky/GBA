@@ -21,10 +21,11 @@ void game_step(void)
       draw_string("GAME OVER", 85, 50, COLOR_WHITE);
       break;
 
-    case RESTART:
+    case CLEAR:
+      draw_string("CLEAR", 100, 50, COLOR_WHITE);
       break;
 
-    case CLEAR:
+    case RESTART:
       break;
   }
 }
