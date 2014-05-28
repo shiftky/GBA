@@ -19,11 +19,14 @@ void ball_step(void)
     case START:
       break;
     case RUNNING:
-      if ( y != old_y && ( y <= 0 || LCD_HEIGHT-ball.width < y )) {
-        //dy *= -1;
+      if ( y != old_y && y <= 0 ) {
+        dy *= -1;
+        return;
+      } else if ( y!= old_y && LCD_HEIGHT-ball.width < y ) {
         game_set_state(DEAD);
         return;
       }
+
       if ( x != old_x && ( x <= 0 || LCD_WIDTH-ball.width < x )) {
         dx *= -1;
         return;
