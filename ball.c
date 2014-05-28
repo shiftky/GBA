@@ -31,7 +31,6 @@ void ball_step(void)
         return;
       } else if ( y!= old_y && LCD_HEIGHT-ball.width < y ) {
         game_set_state(DEAD);
-        ball_init();
         return;
       }
 
@@ -47,6 +46,7 @@ void ball_step(void)
       break;
 
     case RESTART:
+      ball_init();
       break;
   }
 }

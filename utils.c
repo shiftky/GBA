@@ -29,3 +29,14 @@ void draw_string(char *str, int x, int y, hword color)
     draw_char((hword*)VRAM + (LCD_WIDTH * y) + x+FONT_SIZE*i, color, str[i]);
   }
 }
+
+void init_screen(void)
+{
+  int i, j;
+  hword* ptr = (hword*) VRAM;
+  for ( i=0; i<LCD_WIDTH; i++ ) {
+    for ( j=0; j<LCD_HEIGHT; j++ ) {
+      *(ptr++) = COLOR_BLACK;
+    }
+  }
+}
