@@ -4,9 +4,8 @@
 #include "game.h"
 #include "utils.h"
 
-static struct box ball = { 10, 10, 5, 5 };
-static int old_x = 0, old_y = 0;
-static int dx = 2, dy = 1;
+static struct box ball;
+static int dx, dy, old_x, old_y;
 
 int ball_get_dy(void) { return dy; }
 void ball_set_dy(int new_dy) { dy = new_dy; }
@@ -14,9 +13,9 @@ struct box *ball_get_box(void) { return &ball; }
 
 void ball_init(void)
 {
-  ball.x = old_x = 10; ball.y = old_y = 10;
+  ball.x = old_x = 100; ball.y = old_y = 100;
   ball.width = 5; ball.height = 5;
-  dx = 2; dy = 1;
+  dx = 2; dy = -1;
 }
 
 void ball_step(void)
