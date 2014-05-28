@@ -27,6 +27,7 @@ int main(void)
   while (1) {
     ball_step();
     racket_step();
+    block_step();
     game_step();
     delay(INTERVAL);
   }

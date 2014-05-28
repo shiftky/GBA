@@ -11,11 +11,7 @@ void game_step(void)
 {
   switch ( game_get_state() ) {
     case START:
-      draw_string("IMAGINE THE FUTURE.", 50, 30, COLOR_WHITE);
-      if ( get_key_status(KEY_START) ) {
-        draw_string("IMAGINE THE FUTURE.", 50, 30, COLOR_BLACK);
-        game_set_state(RUNNING);
-      }
+      draw_string("IMAGINE THE FUTURE.", 45, 30, COLOR_WHITE);
       break;
 
     case RUNNING:
@@ -23,14 +19,12 @@ void game_step(void)
 
     case DEAD:
       draw_string("GAME OVER", 85, 50, COLOR_WHITE);
-      if ( get_key_status(KEY_START) ) {
-        init_screen();
-        game_set_state(START);
-      }
       break;
 
     case RESTART:
-      game_set_state(RUNNING);
+      break;
+
+    case CLEAR:
       break;
   }
 }

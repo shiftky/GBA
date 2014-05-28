@@ -5,7 +5,7 @@
 #define FONT_SIZE 8
 #define CHAR_SIZE 255
 
-int get_key_status(int key_type) { return !(gba_register(KEY_STATUS) & key_type); }
+int get_key_state(int key_type) { return !(gba_register(KEY_STATUS) & key_type); }
 
 void draw_char(hword *ptr, hword color, int code)
 {

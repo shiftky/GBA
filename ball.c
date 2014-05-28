@@ -16,6 +16,7 @@ void ball_init(void)
 {
   ball.x = old_x = 10; ball.y = old_y = 10;
   ball.width = 5; ball.height = 5;
+  dx = 2; dy = 1;
 }
 
 void ball_step(void)
@@ -23,6 +24,7 @@ void ball_step(void)
   int x = old_x + dx, y = old_y + dy;
   switch ( game_get_state() ) {
     case START:
+      ball_init();
       break;
 
     case RUNNING:
@@ -46,7 +48,9 @@ void ball_step(void)
       break;
 
     case RESTART:
-      ball_init();
+      break;
+
+    case CLEAR:
       break;
   }
 }
