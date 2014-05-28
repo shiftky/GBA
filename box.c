@@ -1,4 +1,5 @@
 #include "gba.h"
+#include "utils.h"
 #include "box.h"
 
 void draw_box(struct box *b, int x, int y, hword color)

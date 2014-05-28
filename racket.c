@@ -2,6 +2,7 @@
 #include "box.h"
 #include "ball.h"
 #include "racket.h"
+#include "utils.h"
 
 #define INIT_X    30
 #define INIT_Y    130
@@ -14,15 +15,13 @@ static int racket_x = INIT_X, racket_y = INIT_Y;
 
 void racket_step(void)
 {
-  int key = gba_register(KEY_STATUS);
-
-  if ( !(key & KEY_LEFT) && racket_x > 0 ) {
+  if ( get_key_status(KEY_LEFT) && racket_x > 0 ) {
     if ( racket_x < DISTANCE ) {
       racket_x = 0;
     } else {
       racket_x -= DISTANCE;
     }
-  } else if ( !(key & KEY_RIGHT) && racket_x < LCD_WIDTH-racket.width ) {
+  } else if ( get_key_status(KEY_RIGHT) && racket_x < LCD_WIDTH-racket.width ) {
     if ( (racket_x + DISTANCE + racket.width) > LCD_WIDTH ) {
       racket_x = LCD_WIDTH - racket.width;
     } else {

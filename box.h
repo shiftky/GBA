@@ -1,6 +1,3 @@
-#define COLOR_WHITE     BGR(31, 31, 31)
-#define COLOR_BLACK     0
-
 struct box {
   int x, y;
   int width, height;

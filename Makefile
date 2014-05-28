@@ -18,13 +18,13 @@ utils.o: gba.h utils.h utils.c
 game.o: gba.h utils.h game.h game.c
 	$(GCC) -c game.c
 
-box.o: gba.h box.h box.c
+box.o: gba.h utils.h box.h box.c
 	$(GCC) -c box.c
 
-ball.o: gba.h game.h box.h ball.h ball.c
+ball.o: gba.h utils.h game.h box.h ball.h ball.c
 	$(GCC) -c ball.c
 
-racket.o: gba.h game.h box.h ball.h racket.h racket.c
+racket.o: gba.h utils.h game.h box.h ball.h racket.h racket.c
 	$(GCC) -c racket.c
 
 main.mb: main.o crt.o utils.o game.o box.o ball.o racket.o

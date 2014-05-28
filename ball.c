@@ -2,6 +2,7 @@
 #include "box.h"
 #include "ball.h"
 #include "game.h"
+#include "utils.h"
 
 static struct box ball = { 10, 10, 5, 5 };
 static int old_x = 0, old_y = 0;
@@ -14,13 +15,13 @@ struct box *ball_get_box(void) { return &ball; }
 void ball_step(void)
 {
   int x = old_x + dx, y = old_y + dy;
-
   switch ( game_get_state() ) {
     case START:
       break;
     case RUNNING:
       if ( y != old_y && ( y <= 0 || LCD_HEIGHT-ball.width < y )) {
-        dy *= -1;
+        //dy *= -1;
+        game_set_state(DEAD);
         return;
       }
       if ( x != old_x && ( x <= 0 || LCD_WIDTH-ball.width < x )) {
