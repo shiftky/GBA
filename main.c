@@ -6,15 +6,16 @@
 
 void wait(int val) {
   int i, j;
-  for (i = 0; i < val; i++)
-    for (j = 0; j < val; j++)
-  ;
+  for (i = 0; i < val; i++) {
+    for (j = 0; j < val; j++) {
+    }
+  }
 }
 
 void delay(hword val)
 {
   val += gba_register(TMR_COUNT0);
-  while (val != gba_register(TMR_COUNT0));
+  while ( val != gba_register(TMR_COUNT0) );
 }
 
 int main(void)

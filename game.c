@@ -24,7 +24,7 @@ void game_step(void)
     case DEAD:
       draw_string("GAME OVER", 50, 50, COLOR_WHITE);
       if ( get_key_status(KEY_START) ) {
-        draw_string("GAME OVER", 50, 50, COLOR_WHITE);
+        draw_string("GAME OVER", 50, 50, COLOR_BLACK);
         game_set_state(START);
       }
       break;
