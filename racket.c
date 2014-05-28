@@ -5,10 +5,12 @@
 #include "racket.h"
 #include "utils.h"
 
-#define INIT_X    100
+//#define INIT_X    100
+#define INIT_X    0
 #define INIT_Y    130
 #define RACKET_H  4
-#define RACKET_W  35
+//#define RACKET_W  35
+#define RACKET_W  LCD_WIDTH
 #define DISTANCE  4
 
 static struct box racket;
