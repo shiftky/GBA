@@ -6,11 +6,11 @@
 #include "utils.h"
 
 #define BLOCK_COLS    8
-#define BLOCK_ROWS    5
+#define BLOCK_ROWS    7
 #define BLOCK_TOP     10
 #define BLOCK_LEFT    20
 #define BLOCK_WIDTH   25
-#define BLOCK_HEIGHT  10
+#define BLOCK_HEIGHT  6
 
 static struct box boxes[BLOCK_COLS][BLOCK_ROWS];
 static char flags[BLOCK_COLS][BLOCK_ROWS];
@@ -45,8 +45,9 @@ void remove_block(int x, int y, struct box *ball)
 {
   int i = (x-BLOCK_LEFT)/BLOCK_WIDTH, j = (y-BLOCK_TOP)/BLOCK_HEIGHT;
   if ( cross(&boxes[i][j], ball) == 1 ) {
-    draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
+    ball_set_dy(-1 * ball_get_dy());
     flags[i][j] = 0;
+    draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
     num_blocks--;
   }
 }
