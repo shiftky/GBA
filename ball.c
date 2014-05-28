@@ -11,7 +11,7 @@ int ball_get_dy(void) { return dy; }
 void ball_set_dy(int new_dy) { dy = new_dy; }
 struct box *ball_get_box(void) { return &ball; }
 
-void ball_init(void)
+static void ball_init(void)
 {
   ball.x = old_x = 100; ball.y = old_y = 100;
   ball.width = 5; ball.height = 5;
