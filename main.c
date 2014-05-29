@@ -5,7 +5,7 @@
 #include "racket.h"
 #include "utils.h"
 
-#define INTERVAL 200
+#define INTERVAL 100
 
 int main(void)
 {
