@@ -52,10 +52,10 @@ void remove_block(int x, int y, struct box *ball)
 {
   int i = (x-BLOCK_LEFT)/BLOCK_WIDTH, j = (y-BLOCK_TOP)/BLOCK_HEIGHT;
   if ( cross(&boxes[i][j], ball) == 1 ) {
-    ball_set_dy(-1 * ball_get_dy());
     flags[i][j] = 0;
-    draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
     num_blocks--;
+    draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
+    ball_set_dy(-1 * ball_get_dy());
   }
 }
 
@@ -69,10 +69,10 @@ void block_step(void)
 
     case RUNNING:
       ball = ball_get_box();
-      if ( hit(ball->x, ball->y) ) { remove_block(ball->x, ball->y, ball); }
-      if ( hit(ball->x+ball->width, ball->y) ) { remove_block(ball->x+ball->width, ball->y, ball); }
-      if ( hit(ball->x, ball->y+ball->height) ) { remove_block(ball->x, ball->y+ball->height, ball); }
-      if ( hit(ball->x+ball->width, ball->y+ball->height) ) { remove_block(ball->x+ball->width, ball->y+ball->height, ball); }
+      if ( hit(ball->x, ball->y) == 1 ) { remove_block(ball->x, ball->y, ball); }
+      if ( hit(ball->x+ball->width, ball->y) == 1 ) { remove_block(ball->x+ball->width, ball->y, ball); }
+      if ( hit(ball->x, ball->y+ball->height) == 1 ) { remove_block(ball->x, ball->y+ball->height, ball); }
+      if ( hit(ball->x+ball->width, ball->y+ball->height) == 1 ) { remove_block(ball->x+ball->width, ball->y+ball->height, ball); }
 
       if ( num_blocks <= 0 ) {
         game_set_state(CLEAR);

@@ -8,7 +8,7 @@
 #define INIT_X    100
 #define INIT_Y    130
 #define RACKET_H  5
-#define RACKET_W  40
+#define RACKET_W  45
 #define DISTANCE  4
 #define RACKET_COLOR BGR(24, 8, 8)
 
@@ -49,11 +49,8 @@ void racket_step(void)
 
       ball = ball_get_box();
       if ( cross(&racket, ball) == 1 ) {
-        if ( (ball->y+ball->height) > racket_y ) {
-          ball_set_dx(-1 * ball_get_dx());
-        } else {
-          ball_set_dy(-1 * ball_get_dy());
-        }
+        if ( (ball->y+ball->height-1) > racket_y ) { ball_set_dx(-1 * ball_get_dx()); }
+        else { ball_set_dy(-1 * ball_get_dy()); }
       }
 
       move_box(&racket, racket_x, racket_y, RACKET_COLOR);

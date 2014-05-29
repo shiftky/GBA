@@ -25,7 +25,6 @@ static void init_ball(void)
 void ball_step(void)
 {
   int x, y;
-
   switch ( game_get_state() ) {
     case START:
       init_ball();
@@ -47,6 +46,7 @@ void ball_step(void)
         dx *= -1;
         return;
       }
+
       move_box(&ball, x, y, BALL_COLOR);
       old_x = x; old_y = y;
       break;
