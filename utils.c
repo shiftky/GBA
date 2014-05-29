@@ -2,10 +2,30 @@
 #include "utils.h"
 #include "8x8.til"
 
-#define FONT_SIZE 8
-#define CHAR_SIZE 255
+int get_key_state(int key_type)
+{
+  return !(gba_register(KEY_STATUS) & key_type);
+}
 
-int get_key_state(int key_type) { return !(gba_register(KEY_STATUS) & key_type); }
+void wait_until(hword time)
+{
+  while ( time != gba_register(TMR_COUNT0) );
+}
+
+void delay(hword val)
+{
+  wait_until(gba_register(TMR_COUNT0) + val);
+}
+
+void wait_until_vblank(void)
+{
+  while ( (gba_register(LCD_STATUS) & 1) == 0 );
+}
+
+void wait_while_vblank(void)
+{
+  while ( (gba_register(LCD_STATUS) & 1) );
+}
 
 void draw_char(hword *ptr, hword color, int code)
 {

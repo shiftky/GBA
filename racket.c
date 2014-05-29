@@ -7,8 +7,8 @@
 
 #define INIT_X    100
 #define INIT_Y    130
-#define RACKET_H  4
-#define RACKET_W  35
+#define RACKET_H  5
+#define RACKET_W  40
 #define DISTANCE  4
 
 static struct box racket;
@@ -25,6 +25,7 @@ static void init_racket(void)
 
 void racket_step(void)
 {
+  struct box *ball;
   switch ( game_get_state() ) {
     case START:
       init_racket();
@@ -45,11 +46,22 @@ void racket_step(void)
         }
       }
 
-      if ( cross(&racket, ball_get_box()) == 1 ) {
-        ball_set_dy(-1 * ball_get_dy());
+      ball = ball_get_box();
+      if ( cross(&racket, ball) == 1 ) {
+        if ( (ball->y+ball->height) > racket_y ) {
+          ball_set_dx(-1 * ball_get_dx());
+        } else {
+          ball_set_dy(-1 * ball_get_dy());
+        }
       }
 
       move_box(&racket, racket_x, racket_y, COLOR_WHITE);
+      break;
+
+    case CLEAR:
+      break;
+
+    case DEAD:
       break;
 
     case RESTART:

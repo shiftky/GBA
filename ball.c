@@ -7,7 +7,9 @@
 static struct box ball;
 static int dx, dy, old_x, old_y;
 
+int ball_get_dx(void) { return dx; }
 int ball_get_dy(void) { return dy; }
+void ball_set_dx(int new_dx) { dx = new_dx; }
 void ball_set_dy(int new_dy) { dy = new_dy; }
 struct box *ball_get_box(void) { return &ball; }
 
@@ -45,6 +47,12 @@ void ball_step(void)
       }
       move_box(&ball, x, y, COLOR_WHITE);
       old_x = x; old_y = y;
+      break;
+
+    case CLEAR:
+      break;
+
+    case DEAD:
       break;
 
     case RESTART:
