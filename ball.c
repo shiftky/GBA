@@ -4,30 +4,33 @@
 #include "game.h"
 #include "utils.h"
 
-static struct box ball = { 10, 10, 5, 5 };
-static int old_x = 0, old_y = 0;
-static int dx = 2, dy = 1;
+static struct box ball;
+static int dx, dy, old_x, old_y;
 
 int ball_get_dy(void) { return dy; }
 void ball_set_dy(int new_dy) { dy = new_dy; }
 struct box *ball_get_box(void) { return &ball; }
 
-void ball_init(void)
+static void init_ball(void)
 {
-  ball.x = old_x = 10; ball.y = old_y = 10;
-  ball.width = 5; ball.height = 5;
-  dx = 2; dy = 1;
+  ball.x = old_x = ball.y = old_y = 100;
+  ball.width = ball.height = 5;
+  dx = 2; dy = -1;
 }
 
 void ball_step(void)
 {
-  int x = old_x + dx, y = old_y + dy;
+  int x, y;
+
   switch ( game_get_state() ) {
     case START:
-      ball_init();
+      init_ball();
       break;
 
     case RUNNING:
+      x = old_x + dx;
+      y = old_y + dy;
+
       if ( y != old_y && y <= 0 ) {
         dy *= -1;
         return;
@@ -44,13 +47,8 @@ void ball_step(void)
       old_x = x; old_y = y;
       break;
 
-    case DEAD:
-      break;
-
     case RESTART:
-      break;
-
-    case CLEAR:
+      init_ball();
       break;
   }
 }
