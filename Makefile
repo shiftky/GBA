@@ -9,7 +9,7 @@ VBA            = /Applications/Visual\ Boy\ Advance/VisualBoyAdvance.app/Content
 crt.o: crt.S
 	$(GCC) -c crt.S
 
-main.o: main.c
+main.o: gba.h delay.h ball.h racket.h main.c
 	$(GCC) -c main.c
 
 utils.o: gba.h utils.h utils.c
