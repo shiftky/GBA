@@ -4,6 +4,8 @@
 #include "game.h"
 #include "utils.h"
 
+#define BALL_COLOR BGR(31, 31, 0)
+
 static struct box ball;
 static int dx, dy, old_x, old_y;
 
@@ -45,7 +47,7 @@ void ball_step(void)
         dx *= -1;
         return;
       }
-      move_box(&ball, x, y, COLOR_WHITE);
+      move_box(&ball, x, y, BALL_COLOR);
       old_x = x; old_y = y;
       break;
 

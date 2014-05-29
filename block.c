@@ -15,6 +15,13 @@
 static struct box boxes[BLOCK_COLS][BLOCK_ROWS];
 static char flags[BLOCK_COLS][BLOCK_ROWS];
 static int num_blocks;
+static int colors[BLOCK_ROWS] = { BGR(23,  8, 8),
+                                  BGR(22, 12,  6),
+                                  BGR(20, 14, 5),
+                                  BGR(19, 19, 5),
+                                  BGR(8,  19, 8),
+                                  BGR(8, 15, 30),
+                                  BGR(8, 8, 20) };
 
 static void init_block(void)
 {
@@ -27,7 +34,7 @@ static void init_block(void)
       boxes[i][j].width = BLOCK_WIDTH - 1;
       boxes[i][j].height = BLOCK_HEIGHT - 1;
       flags[i][j] = 1;
-      draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_WHITE);
+      draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, colors[j]);
     }
   }
 }

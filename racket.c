@@ -10,6 +10,7 @@
 #define RACKET_H  5
 #define RACKET_W  40
 #define DISTANCE  4
+#define RACKET_COLOR BGR(24, 8, 8)
 
 static struct box racket;
 static int racket_x, racket_y;
@@ -20,7 +21,7 @@ static void init_racket(void)
   racket_y = racket.y = INIT_Y;
   racket.width = RACKET_W;
   racket.height = RACKET_H;
-  draw_box(&racket, racket.x, racket.y, COLOR_WHITE);
+  draw_box(&racket, racket.x, racket.y, RACKET_COLOR);
 }
 
 void racket_step(void)
@@ -55,7 +56,7 @@ void racket_step(void)
         }
       }
 
-      move_box(&racket, racket_x, racket_y, COLOR_WHITE);
+      move_box(&racket, racket_x, racket_y, RACKET_COLOR);
       break;
 
     case CLEAR:
