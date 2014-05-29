@@ -1,5 +1,7 @@
 #define COLOR_WHITE BGR(31, 31, 31)
 #define COLOR_BLACK BGR(0, 0, 0)
+#define COLOR_RED BGR(31, 0, 0)
+#define COLOR_ITF BGR(3, 21, 25)
 #define FONT_SIZE 8
 #define CHAR_SIZE 255
 
