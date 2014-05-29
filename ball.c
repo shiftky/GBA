@@ -47,6 +47,12 @@ void ball_step(void)
       old_x = x; old_y = y;
       break;
 
+    case CLEAR:
+      break;
+
+    case DEAD:
+      break;
+
     case RESTART:
       init_ball();
       break;

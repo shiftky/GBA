@@ -72,6 +72,12 @@ void block_step(void)
       }
       break;
 
+    case CLEAR:
+      break;
+
+    case DEAD:
+      break;
+
     case RESTART:
       init_block();
       break;

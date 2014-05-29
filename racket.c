@@ -52,6 +52,12 @@ void racket_step(void)
       move_box(&racket, racket_x, racket_y, COLOR_WHITE);
       break;
 
+    case CLEAR:
+      break;
+
+    case DEAD:
+      break;
+
     case RESTART:
       init_racket();
       break;
