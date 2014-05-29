@@ -1,7 +1,7 @@
 #include "gba.h"
-#include "delay.h"
 #include "ball.h"
 #include "racket.h"
+#include "utils.h"
 
 #define INTERVAL 200
 
