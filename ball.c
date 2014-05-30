@@ -65,6 +65,7 @@ void ball_step(void)
       break;
 
     case CLEAR:
+      draw_box(&ball, old_x, old_y, BALL_COLOR);
       break;
 
     case DEAD:
