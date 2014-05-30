@@ -3,4 +3,7 @@
 .DS_Store
 
 *.o
+*.mb
+*.bin
+*.out
 *.swp
