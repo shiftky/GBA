@@ -58,7 +58,7 @@ void racket_step(void)
           ball_set_dx( ball_get_dx() < 0 ? BALL_DX : -1 * BALL_DX );
         }
         else {
-          if ( (ball->y+(ball->height-1)/2 <= racket_x + RACKET_EDGE) || (ball->y+(ball->height-1)/2 <= racket_x + racket.width - RACKET_EDGE) ) {
+          if ( (ball->x+(ball->width-1)/2 <= racket_x+RACKET_EDGE) || (ball->x+(ball->width-1)/2 >= racket_x+racket.width-1-RACKET_EDGE) )  {
             ball_set_dx( ball_get_dx() < 0 ? -1 * BALL_EDGE_DX : BALL_EDGE_DX );
             ball_set_dy( ball_get_dy() < 0 ? BALL_EDGE_DY : -1 * BALL_EDGE_DY );
           } else {

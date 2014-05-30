@@ -4,6 +4,8 @@
 #include "game.h"
 #include "utils.h"
 
+#define BALL_DX   2
+#define BALL_DY   1
 #define BALL_COLOR BGR(31, 31, 0)
 
 static struct box ball;
@@ -35,7 +37,7 @@ void ball_step(void)
       y = old_y + dy;
 
       if ( y != old_y && y <= 0 ) {
-        dy *= -1;
+        dy = dy > 0 ? -1*BALL_DY : BALL_DY;
         return;
       } else if ( y!= old_y && LCD_HEIGHT-ball.width < y ) {
         game_set_state(DEAD);
@@ -43,7 +45,7 @@ void ball_step(void)
       }
 
       if ( x != old_x && ( x <= 0 || LCD_WIDTH-ball.width < x )) {
-        dx *= -1;
+        dx = dx > 0 ? -1*BALL_DX : BALL_DX;
         return;
       }
 
