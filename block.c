@@ -11,6 +11,7 @@
 #define BLOCK_LEFT    20
 #define BLOCK_WIDTH   25
 #define BLOCK_HEIGHT  6
+#define BALL_DY       1
 
 static struct box boxes[BLOCK_COLS][BLOCK_ROWS];
 static char flags[BLOCK_COLS][BLOCK_ROWS];
@@ -55,7 +56,7 @@ void remove_block(int x, int y, struct box *ball)
     flags[i][j] = 0;
     num_blocks--;
     draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
-    ball_set_dy(-1 * ball_get_dy());
+    ball_set_dy( ball_get_dy() < 0 ? BALL_DY : -1 * BALL_DY );
   }
 }
 

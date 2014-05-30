@@ -11,6 +11,11 @@
 #define RACKET_W  45
 #define DISTANCE  4
 #define RACKET_COLOR BGR(24, 8, 8)
+#define BALL_DX   2
+#define BALL_DY   1
+#define BALL_EDGE_DX  3
+#define BALL_EDGE_DY  1
+#define RACKET_EDGE   10
 
 static struct box racket;
 static int racket_x, racket_y;
@@ -49,8 +54,17 @@ void racket_step(void)
 
       ball = ball_get_box();
       if ( cross(&racket, ball) == 1 ) {
-        if ( (ball->y+ball->height-1) > racket_y ) { ball_set_dx(-1 * ball_get_dx()); }
-        else { ball_set_dy(-1 * ball_get_dy()); }
+        if ( (ball->y+ball->height-1) > racket_y ) {
+          ball_set_dx( ball_get_dx() < 0 ? BALL_DX : -1 * BALL_DX );
+        }
+        else {
+          if ( (ball->y+(ball->height-1)/2 <= racket_x + RACKET_EDGE) || (ball->y+(ball->height-1)/2 <= racket_x + racket.width - RACKET_EDGE) ) {
+            ball_set_dx( ball_get_dx() < 0 ? -1 * BALL_EDGE_DX : BALL_EDGE_DX );
+            ball_set_dy( ball_get_dy() < 0 ? BALL_EDGE_DY : -1 * BALL_EDGE_DY );
+          } else {
+            ball_set_dy( ball_get_dy() < 0 ? BALL_DY : -1 * BALL_DY );
+          }
+        }
       }
 
       move_box(&racket, racket_x, racket_y, RACKET_COLOR);
