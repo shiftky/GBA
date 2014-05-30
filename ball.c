@@ -9,8 +9,9 @@
 #define BALL_COLOR BGR(31, 31, 0)
 
 static struct box ball;
-static int dx, dy, old_x, old_y, ball_num = 2;
+static int dx, dy, old_x, old_y, remaining;
 
+int ball_get_remaining(void) { return remaining; }
 int ball_get_dx(void) { return dx; }
 int ball_get_dy(void) { return dy; }
 void ball_set_dx(int new_dx) { dx = new_dx; }
@@ -29,7 +30,7 @@ void ball_step(void)
   int x, y;
   switch ( game_get_state() ) {
     case START:
-      ball_num = 2;
+      remaining = 3;
       init_ball();
       break;
 
@@ -48,10 +49,10 @@ void ball_step(void)
         dy = dy > 0 ? -1*BALL_DY : BALL_DY;
         return;
       } else if ( y!= old_y && LCD_HEIGHT-ball.width < y ) {
-        if ( ball_num <= 0 ) {
+        if ( remaining <= 1 ) {
           game_set_state(DEAD);
         } else {
-          ball_num--;
+          remaining--;
           init_ball();
           draw_box(&ball, dx > 0 ? x + BALL_DX : x + (-1 * BALL_DX), dy > 0 ? y + BALL_DY : y + (-1 * BALL_DY) , COLOR_BLACK);
           game_set_state(REMAINING);
@@ -70,7 +71,7 @@ void ball_step(void)
       break;
 
     case RESTART:
-      ball_num = 2;
+      remaining = 3;
       init_ball();
       break;
   }

@@ -42,6 +42,21 @@ void draw_char(hword *ptr, hword color, int code)
   }
 }
 
+void draw_num(int n, int x, int y, hword color)
+{
+  int i = 0, j, k;
+  char num_str[LCD_WIDTH/8];
+  while ( n > 10 ) {
+    num_str[i] = n % 10 + 0x30;
+    n = n / 10;
+    i++;
+  }
+  num_str[i] = n + 0x30;
+  for ( k=0, j=i; j>=0; j--, k++ ) {
+    draw_char((hword*)VRAM + (LCD_WIDTH * y) + x+FONT_SIZE*k, color, num_str[j]);
+  }
+}
+
 void draw_string(char *str, int x, int y, hword color)
 {
   int i;

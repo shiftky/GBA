@@ -1,4 +1,5 @@
 #include "gba.h"
+#include "ball.h"
 #include "game.h"
 #include "utils.h"
 
@@ -19,9 +20,11 @@ void game_step(void)
       break;
 
     case REMAINING:
-      draw_string("ball x 3", 90, 85, COLOR_WHITE);
+      draw_string("ball x", 90, 85, COLOR_WHITE);
+      draw_num(ball_get_remaining(), 145, 85, COLOR_WHITE);
       delay(30000);
-      draw_string("ball x 3", 90, 85, COLOR_BLACK);
+      draw_string("ball x", 90, 85, COLOR_BLACK);
+      draw_num(ball_get_remaining(), 145, 85, COLOR_BLACK);
       game_set_state(RUNNING);
       break;
 
