@@ -1,4 +1,4 @@
-enum state { START, RUNNING, CLEAR, DEAD, RESTART };
+enum state { START, RUNNING, CLEAR, REMAINING, DEAD, RESTART };
 
 extern void game_step(void);
 extern enum state game_get_state(void);

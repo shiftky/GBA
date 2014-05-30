@@ -37,6 +37,11 @@ void racket_step(void)
       init_racket();
       break;
 
+    case REMAINING:
+      draw_box(&racket, racket.x, racket.y, COLOR_BLACK);
+      init_racket();
+      break;
+
     case RUNNING:
       if ( get_key_state(KEY_LEFT) && racket_x > 0 ) {
         if ( racket_x < DISTANCE ) {
