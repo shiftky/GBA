@@ -11,10 +11,18 @@
 #define BLOCK_LEFT    20
 #define BLOCK_WIDTH   25
 #define BLOCK_HEIGHT  6
+#define BALL_DY       1
 
 static struct box boxes[BLOCK_COLS][BLOCK_ROWS];
 static char flags[BLOCK_COLS][BLOCK_ROWS];
 static int num_blocks;
+static int colors[BLOCK_ROWS] = { BGR(23,  8, 8),
+                                  BGR(22, 12,  6),
+                                  BGR(20, 14, 5),
+                                  BGR(19, 19, 5),
+                                  BGR(8,  19, 8),
+                                  BGR(8, 15, 30),
+                                  BGR(8, 8, 20) };
 
 static void init_block(void)
 {
@@ -27,7 +35,7 @@ static void init_block(void)
       boxes[i][j].width = BLOCK_WIDTH - 1;
       boxes[i][j].height = BLOCK_HEIGHT - 1;
       flags[i][j] = 1;
-      draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_WHITE);
+      draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, colors[j]);
     }
   }
 }
@@ -45,10 +53,10 @@ void remove_block(int x, int y, struct box *ball)
 {
   int i = (x-BLOCK_LEFT)/BLOCK_WIDTH, j = (y-BLOCK_TOP)/BLOCK_HEIGHT;
   if ( cross(&boxes[i][j], ball) == 1 ) {
-    ball_set_dy(-1 * ball_get_dy());
     flags[i][j] = 0;
-    draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
     num_blocks--;
+    draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
+    ball_set_dy( ball_get_dy() < 0 ? BALL_DY : -1 * BALL_DY );
   }
 }
 
@@ -62,10 +70,10 @@ void block_step(void)
 
     case RUNNING:
       ball = ball_get_box();
-      if ( hit(ball->x, ball->y) ) { remove_block(ball->x, ball->y, ball); }
-      if ( hit(ball->x+ball->width, ball->y) ) { remove_block(ball->x+ball->width, ball->y, ball); }
-      if ( hit(ball->x, ball->y+ball->height) ) { remove_block(ball->x, ball->y+ball->height, ball); }
-      if ( hit(ball->x+ball->width, ball->y+ball->height) ) { remove_block(ball->x+ball->width, ball->y+ball->height, ball); }
+      if ( hit(ball->x, ball->y) == 1 ) { remove_block(ball->x, ball->y, ball); }
+      if ( hit(ball->x+ball->width, ball->y) == 1 ) { remove_block(ball->x+ball->width, ball->y, ball); }
+      if ( hit(ball->x, ball->y+ball->height) == 1 ) { remove_block(ball->x, ball->y+ball->height, ball); }
+      if ( hit(ball->x+ball->width, ball->y+ball->height) == 1 ) { remove_block(ball->x+ball->width, ball->y+ball->height, ball); }
 
       if ( num_blocks <= 0 ) {
         game_set_state(CLEAR);
