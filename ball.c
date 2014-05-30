@@ -52,9 +52,9 @@ void ball_step(void)
         if ( remaining <= 1 ) {
           game_set_state(DEAD);
         } else {
+          draw_box(&ball, ball.x, ball.y, COLOR_BLACK);
           remaining--;
           init_ball();
-          draw_box(&ball, dx > 0 ? x + BALL_DX : x + (-1 * BALL_DX), dy > 0 ? y + BALL_DY : y + (-1 * BALL_DY) , COLOR_BLACK);
           game_set_state(REMAINING);
         }
         return;

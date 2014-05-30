@@ -7,7 +7,7 @@
 
 #define BLOCK_COLS    8
 #define BLOCK_ROWS    7
-#define BLOCK_TOP     10
+#define BLOCK_TOP     20
 #define BLOCK_LEFT    20
 #define BLOCK_WIDTH   25
 #define BLOCK_HEIGHT  6
