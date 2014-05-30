@@ -68,6 +68,9 @@ void block_step(void)
       init_block();
       break;
 
+    case REMAINING:
+      break;
+
     case RUNNING:
       ball = ball_get_box();
       if ( hit(ball->x, ball->y) == 1 ) { remove_block(ball->x, ball->y, ball); }

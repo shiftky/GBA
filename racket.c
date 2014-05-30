@@ -37,6 +37,9 @@ void racket_step(void)
       init_racket();
       break;
 
+    case REMAINING:
+      break;
+
     case RUNNING:
       if ( get_key_state(KEY_LEFT) && racket_x > 0 ) {
         if ( racket_x < DISTANCE ) {

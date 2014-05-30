@@ -18,6 +18,9 @@ void game_step(void)
       }
       break;
 
+    case REMAINING:
+      break;
+
     case RUNNING:
       // for Debug
       if ( get_key_state(KEY_SELECT) ) {

@@ -32,6 +32,9 @@ void ball_step(void)
       init_ball();
       break;
 
+    case REMAINING:
+      break;
+
     case RUNNING:
       x = old_x + dx;
       y = old_y + dy;
