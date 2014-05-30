@@ -16,7 +16,7 @@ main.o: gba.h utils.h ball.h racket.h main.c
 utils.o: gba.h utils.h utils.c
 	$(GCC) $(CFLAGS) -c utils.c
 
-game.o: gba.h utils.h game.h game.c
+game.o: gba.h utils.h ball.h game.h game.c
 	$(GCC) $(CFLAGS) -c game.c
 
 box.o: gba.h utils.h box.h box.c

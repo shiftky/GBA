@@ -1,4 +1,5 @@
 #include "gba.h"
+#include "ball.h"
 #include "game.h"
 #include "utils.h"
 
@@ -14,8 +15,17 @@ void game_step(void)
       draw_string("Press START key to start.", 23, 85, COLOR_WHITE);
       if ( get_key_state(KEY_START) ) {
         draw_string("Press START key to start.", 23, 85, COLOR_BLACK);
-        game_set_state(RUNNING);
+        game_set_state(REMAINING);
       }
+      break;
+
+    case REMAINING:
+      draw_string("ball x", 90, 85, COLOR_WHITE);
+      draw_num(ball_get_remaining(), 145, 85, COLOR_WHITE);
+      delay(30000);
+      draw_string("ball x", 90, 85, COLOR_BLACK);
+      draw_num(ball_get_remaining(), 145, 85, COLOR_BLACK);
+      game_set_state(RUNNING);
       break;
 
     case RUNNING:
