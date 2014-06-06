@@ -33,7 +33,13 @@ void move_box(struct box *b, int x, int y, hword color)
 int cross(struct box *b1, struct box *b2)
 {
   if ((b1->x <= b2->x+b2->width-1 && b1->x+b1->width-1 >= b2->x) && (b1->y <= b2->y+b2->height-1 && b1->y+b1->height-1 >= b2->y)) {
-    return 1;
+    if ( b2->x < b1->x && b1->x <= b2->x+b2->width ) {
+      return 2;
+    } else if ( b2->x <= b1->x+b1->width && b1->x+b1->width < b2->x+b2->width ) {
+      return 3;
+    } else {
+      return 1;
+    }
   } else {
     return 0;
   }

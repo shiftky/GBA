@@ -1,45 +1,62 @@
-all: main.mb
-
+#========================================
+# Makefile
+#========================================
+#----------------------------------------
+# Tool settings
+#----------------------------------------
 DEVKIT_BIN_DIR = $(HOME)/bin/kumikomios/devkitPro/devkitARM/bin
 GCC            = $(DEVKIT_BIN_DIR)/arm-none-eabi-gcc
 LD             = $(DEVKIT_BIN_DIR)/arm-none-eabi-ld
 OBJCOPY        = $(DEVKIT_BIN_DIR)/arm-none-eabi-objcopy
 VBA            = /Applications/Visual\ Boy\ Advance/VisualBoyAdvance.app/Contents/MacOS/VisualBoyAdvance
-CFLAGS				= -W -Wall -Wno-attributes
+OPTUSB         = optusb
+CFLAGS         = -W -Wall -Wno-attributes
 
-crt.o: crt.S
-	$(GCC) $(CFLAGS) -c crt.S
+#----------------------------------------
+# File and Directory settings
+#----------------------------------------
+TARGET = main.mb
+TARGET_OUT = $(patsubst %.mb, %.out, $(TARGET))
+INCLUDE_DIR = include
+SRCS_DIR = src
+OBJ_DIR = build
+BIN_DIR = bin
+GCC_LS = -T $(SRCS_DIR)/gcc.ls
+CRT = $(filter-out $(SRCS_DIR), $(shell find $(SRCS_DIR) -name "*.S"))
+CRT_OBJ = $(addprefix $(OBJ_DIR)/, $(subst $(SRCS_DIR)/, , $(patsubst %.S, %.o, $(CRT))))
+SRCS = $(filter-out $(SRCS_DIR), $(shell find $(SRCS_DIR) -name "*.c"))
+OBJS = $(addprefix $(OBJ_DIR)/, $(subst $(SRCS_DIR)/, , $(patsubst %.c, %.o, $(SRCS))))
 
-main.o: gba.h utils.h ball.h racket.h main.c
-	$(GCC) $(CFLAGS) -c main.c
+#----------------------------------------
+# Tasks
+#----------------------------------------
+default:
+	@[ -d $(OBJ_DIR) ] || mkdir -p $(OBJ_DIR)
+	@[ -d $(BIN_DIR) ] || mkdir -p $(BIN_DIR)
+	@make all
 
-utils.o: gba.h utils.h utils.c
-	$(GCC) $(CFLAGS) -c utils.c
+all: $(TARGET)
 
-game.o: gba.h utils.h ball.h game.h game.c
-	$(GCC) $(CFLAGS) -c game.c
+$(TARGET): $(TARGET_OUT)
+	$(OBJCOPY) -O binary $(OBJ_DIR)/$^ $(BIN_DIR)/$@
 
-box.o: gba.h utils.h box.h box.c
-	$(GCC) $(CFLAGS) -c box.c
+$(TARGET_OUT): $(CRT_OBJ) $(OBJS)
+	$(LD) -o $(OBJ_DIR)/$@ $(GCC_LS) $(CRT_OBJ) $^
 
-ball.o: gba.h utils.h game.h box.h ball.h ball.c
-	$(GCC) $(CFLAGS) -c ball.c
+$(CRT_OBJ): $(CRT)
+	$(GCC) $(CFLAGS) -o $@ -c $<
 
-racket.o: gba.h utils.h game.h box.h ball.h racket.h racket.c
-	$(GCC) $(CFLAGS) -c racket.c
+$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
+	$(GCC) $(CFLAGS) -I $(INCLUDE_DIR) -o $@ -c $<
 
-block.o: gba.h block.h block.c
-	$(GCC) $(CFLAGS) -c block.c
+trans: $(TARGET)
+	$(OPTUSB) $(BIN_DIR)/$^
 
-main.mb: main.o crt.o utils.o game.o box.o ball.o racket.o block.o
-	$(LD) -o main.out -T gcc.ls crt.o utils.o game.o box.o ball.o racket.o block.o main.o
-	$(OBJCOPY) -O binary main.out main.mb
+run: $(TARGET)
+	$(VBA) $(BIN_DIR)/$^ 1>/dev/null 2>/dev/null &
 
 clean:
-	/bin/rm -f *.o *.bin *.out *.mb
+	rm -f $(OBJ_DIR)/*
+	rm -f $(BIN_DIR)/*
 
-trans: main.mb
-	optusb main.mb
-
-run: main.mb
-	$(VBA) main.mb 1>/dev/null 2>/dev/null &
+.PHONY: clean

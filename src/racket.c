@@ -58,7 +58,7 @@ void racket_step(void)
       }
 
       ball = ball_get_box();
-      if ( cross(&racket, ball) == 1 ) {
+      if ( cross(&racket, ball) >= 1 ) {
         if ( (ball->y+ball->height-1) > racket_y ) {
           ball_set_dx( ball_get_dx() < 0 ? BALL_DX : -1 * BALL_DX );
         }
