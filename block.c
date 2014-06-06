@@ -7,11 +7,12 @@
 
 #define BLOCK_COLS    8
 #define BLOCK_ROWS    7
-#define BLOCK_TOP     20
+#define BLOCK_TOP     15
 #define BLOCK_LEFT    20
 #define BLOCK_WIDTH   25
 #define BLOCK_HEIGHT  6
 #define BALL_DY       1
+#define BALL_DX       2
 
 static struct box boxes[BLOCK_COLS][BLOCK_ROWS];
 static char flags[BLOCK_COLS][BLOCK_ROWS];
@@ -52,11 +53,17 @@ static int hit(int x, int y)
 void remove_block(int x, int y, struct box *ball)
 {
   int i = (x-BLOCK_LEFT)/BLOCK_WIDTH, j = (y-BLOCK_TOP)/BLOCK_HEIGHT;
-  if ( cross(&boxes[i][j], ball) == 1 ) {
+  int c = cross(&boxes[i][j], ball);
+
+  if ( c >= 1 ) {
     flags[i][j] = 0;
     num_blocks--;
     draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, COLOR_BLACK);
-    ball_set_dy( ball_get_dy() < 0 ? BALL_DY : -1 * BALL_DY );
+    if ( c == 2 || c == 3 ) {
+      ball_set_dx( ball_get_dx() < 0 ? BALL_DX : -1 * BALL_DX );
+    } else {
+      ball_set_dy( ball_get_dy() < 0 ? BALL_DY : -1 * BALL_DY );
+    }
   }
 }
 
