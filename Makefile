@@ -49,7 +49,7 @@ $(CRT_OBJ): $(CRT)
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	$(GCC) $(CFLAGS) -I $(INCLUDE_DIR) -o $@ -c $<
 
-trans: $(TARGET)
+run-gba: $(TARGET)
 	$(OPTUSB) $(BIN_DIR)/$^
 
 run: $(TARGET)
