@@ -1,4 +1,4 @@
-#ifndef _BALL_H
-#define _BALL_H
+#ifndef _BLOCK_H
+#define _BLOCK_H
 extern void block_step(void);
 #endif
