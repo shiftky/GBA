@@ -20,9 +20,10 @@ struct box *ball_get_box(void) { return &ball; }
 
 static void init_ball(void)
 {
-  ball.x = old_x = ball.y = old_y = LCD_WIDTH / 2;
+  ball.x = old_x = 10;
+  ball.y = old_y = 60;
   ball.width = ball.height = 5;
-  dx = 2; dy = -1;
+  dx = 2; dy = 1;
 }
 
 void ball_step(void)
