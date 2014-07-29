@@ -56,17 +56,27 @@ void game_step(void)
       break;
 
     case CLEAR:
-      draw_string("CLEAR!!", 95, 70, COLOR_ITF);
-      draw_string("Press A key to", 65, 85, COLOR_WHITE);
-      draw_string("next stage!", 80, 95, COLOR_WHITE);
-      if ( get_key_state(KEY_A) ) {
-        init_screen();
-        current_stage++;
-        game_set_state(NEXTSTAGE);
+      if ( current_stage < 2 ) {
+        draw_string("CLEAR!!", 95, 70, COLOR_ITF);
+        draw_string("Press A key to", 65, 85, COLOR_WHITE);
+        draw_string("next stage!", 80, 95, COLOR_WHITE);
+        if ( get_key_state(KEY_A) ) {
+          init_screen();
+          current_stage++;
+          game_set_state(NEXTSTAGE);
+        }
+      } else {
+        draw_string("CLEAR!!", 95, 70, COLOR_ITF);
+       draw_string("Press START key to restart.", 16, 85, COLOR_WHITE);
+        if ( get_key_state(KEY_START) ) {
+          init_screen();
+          game_set_state(RESTART);
+        }
       }
       break;
 
     case RESTART:
+      current_stage = 0;
       game_set_state(START);
       break;
   }
