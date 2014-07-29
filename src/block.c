@@ -25,7 +25,28 @@ static int colors[BLOCK_ROWS] = { BGR(23,  8, 8),
                                   BGR(8, 15, 30),
                                   BGR(8, 8, 20) };
 
-static void init_block(void)
+static int stages[2][BLOCK_ROWS][BLOCK_COLS] = {
+  {
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 }
+  },
+  {
+    {0, 0, 1, 1, 1, 1, 0, 0 },
+    {0, 1, 1, 1, 1, 1, 1, 0 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {1, 1, 1, 1, 1, 1, 1, 1 },
+    {0, 1, 1, 1, 1, 1, 1, 0 },
+    {0, 0, 1, 1, 1, 1, 0, 0 }
+  }
+};
+
+static void init_blocks(void)
 {
   int i, j;
   num_blocks = BLOCK_COLS * BLOCK_ROWS;
@@ -72,7 +93,7 @@ void block_step(void)
   struct box *ball;
   switch ( game_get_state() ) {
     case START:
-      init_block();
+      init_blocks();
       break;
 
     case NEXTSTAGE:
@@ -100,7 +121,7 @@ void block_step(void)
       break;
 
     case RESTART:
-      init_block();
+      init_blocks();
       break;
   }
 }
