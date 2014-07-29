@@ -75,6 +75,9 @@ void block_step(void)
       init_block();
       break;
 
+    case NEXTSTAGE:
+      break;
+
     case REMAINING:
       break;
 

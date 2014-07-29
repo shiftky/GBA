@@ -38,6 +38,9 @@ void racket_step(void)
       init_racket();
       break;
 
+    case NEXTSTAGE:
+      break;
+
     case REMAINING:
       draw_box(&racket, racket.x, racket.y, COLOR_BLACK);
       init_racket();

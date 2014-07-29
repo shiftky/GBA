@@ -19,6 +19,10 @@ void game_step(void)
       }
       break;
 
+    case NEXTSTAGE:
+      game_set_state(REMAINING);
+      break;
+
     case REMAINING:
       draw_string("ball x", 90, 85, COLOR_WHITE);
       draw_num(ball_get_remaining(), 145, 85, COLOR_WHITE);
