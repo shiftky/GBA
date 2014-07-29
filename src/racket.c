@@ -39,6 +39,7 @@ void racket_step(void)
       break;
 
     case NEXTSTAGE:
+      init_racket();
       break;
 
     case REMAINING:

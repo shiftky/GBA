@@ -36,6 +36,7 @@ void ball_step(void)
       break;
 
     case NEXTSTAGE:
+      init_ball();
       break;
 
     case REMAINING:

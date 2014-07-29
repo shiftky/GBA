@@ -49,15 +49,19 @@ static int stages[2][BLOCK_ROWS][BLOCK_COLS] = {
 static void init_blocks(void)
 {
   int i, j;
-  num_blocks = BLOCK_COLS * BLOCK_ROWS;
+
+  num_blocks = 0;
   for ( i=0; i<BLOCK_COLS; i++ ) {
     for ( j=0; j<BLOCK_ROWS; j++ ) {
-      boxes[i][j].x = 20 + i*BLOCK_WIDTH;
-      boxes[i][j].y = BLOCK_TOP + j*BLOCK_HEIGHT;
-      boxes[i][j].width = BLOCK_WIDTH - 1;
-      boxes[i][j].height = BLOCK_HEIGHT - 1;
-      flags[i][j] = 1;
-      draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, colors[j]);
+      if ( stages[game_get_stage()][j][i] ) {
+        boxes[i][j].x = 20 + i*BLOCK_WIDTH;
+        boxes[i][j].y = BLOCK_TOP + j*BLOCK_HEIGHT;
+        boxes[i][j].width = BLOCK_WIDTH - 1;
+        boxes[i][j].height = BLOCK_HEIGHT - 1;
+        flags[i][j] = 1;
+        num_blocks++;
+        draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, colors[j]);
+      }
     }
   }
 }
@@ -97,6 +101,7 @@ void block_step(void)
       break;
 
     case NEXTSTAGE:
+      init_blocks();
       break;
 
     case REMAINING:
