@@ -29,8 +29,8 @@ void game_step(void)
     case REMAINING:
       draw_string("stage ", 95, 75, COLOR_WHITE);
       draw_num(current_stage+1, 140, 75, COLOR_WHITE);
-      draw_string("ball x", 90, 85, COLOR_WHITE);
-      draw_num(ball_get_remaining(), 145, 85, COLOR_WHITE);
+      draw_string("ball x", 90, 85, COLOR_YELLOW);
+      draw_num(ball_get_remaining(), 145, 85, COLOR_YELLOW);
       delay(30000);
       draw_string("stage ", 95, 75, COLOR_BLACK);
       draw_num(current_stage+1, 140, 75, COLOR_BLACK);
@@ -67,7 +67,7 @@ void game_step(void)
         }
       } else {
         draw_string("CLEAR!!", 95, 70, COLOR_ITF);
-       draw_string("Press START key to restart.", 16, 85, COLOR_WHITE);
+        draw_string("Press START key to restart.", 16, 85, COLOR_WHITE);
         if ( get_key_state(KEY_START) ) {
           init_screen();
           game_set_state(RESTART);

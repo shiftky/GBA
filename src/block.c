@@ -62,7 +62,7 @@ static void init_blocks(void)
   num_blocks = 0;
   for ( i=0; i<BLOCK_COLS; i++ ) {
     for ( j=0; j<BLOCK_ROWS; j++ ) {
-      if ( stages[game_get_stage()][j][i] ) {
+      if ( stages[game_get_stage()][j][i] == 1 ) {
         boxes[i][j].x = 20 + i*BLOCK_WIDTH;
         boxes[i][j].y = BLOCK_TOP + j*BLOCK_HEIGHT;
         boxes[i][j].width = BLOCK_WIDTH - 1;
@@ -70,6 +70,8 @@ static void init_blocks(void)
         flags[i][j] = 1;
         num_blocks++;
         draw_box(&boxes[i][j], boxes[i][j].x, boxes[i][j].y, colors[j]);
+      } else {
+        flags[i][j] = 0;
       }
     }
   }
