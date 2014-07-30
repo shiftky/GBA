@@ -67,10 +67,10 @@ void racket_step(void)
         if ( (ball->y+ball->height-1) <= racket_y ) {
           ball_set_dy( ball_get_dy() < 0 ? BALL_DY : -1 * BALL_DY );
           if ( (ball->x+(ball->width-1)/2) <= (racket_x+RACKET_L_EDGE) ) {
-            ball_set_dx( ball_get_dx() > 0 ? -1*BALL_EDGE_DX : -1*BALL_DX );
+            ball_set_dx( ball_get_dx() > 0 ? -1*BALL_EDGE_DX : -1*BALL_EDGE_DX );
           }
           else if ( (racket_x+RACKET_R_EDGE) <= (ball->x+(ball->width-1)/2) ){
-            ball_set_dx( ball_get_dx() < 0 ? BALL_EDGE_DX : BALL_DX );
+            ball_set_dx( ball_get_dx() < 0 ? BALL_EDGE_DX : BALL_EDGE_DX );
           }
         } else {
           ball_set_dx( ball_get_dx() < 0 ? BALL_DX : -1 * BALL_DX );
