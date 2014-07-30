@@ -1,3 +1,7 @@
+#ifndef _UTILS_H
+#define _UTILS_H
+
+#define COLOR_YELLOW BGR(31, 31, 0)
 #define COLOR_WHITE BGR(31, 31, 31)
 #define COLOR_BLACK BGR(0, 0, 0)
 #define COLOR_RED BGR(31, 0, 0)
@@ -14,3 +18,4 @@ extern void draw_char(hword*, hword, int);
 extern void draw_num(int, int, int, hword);
 extern void draw_string(char*, int, int, hword);
 extern void init_screen(void);
+#endif

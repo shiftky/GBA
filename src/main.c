@@ -4,6 +4,7 @@
 #include "block.h"
 #include "racket.h"
 #include "utils.h"
+#include "debug.h"
 
 #define INTERVAL 100
 
