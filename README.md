@@ -5,7 +5,7 @@
 
 プログラムは下記の環境で動作確認しています。
 * Nintendo GAME BOY ADVANCE
-* [VisualBoyAdvance v1.7.6 (Mac)](http://sourceforge.jp/projects/sfnet_macboyadvance/)
+* [VisualBoyAdvance v1.7.6 (Mac)](http://sourceforge.net/projects/macboyadvance/)
 
 ## ビルド・実行方法
 プログラムのビルドには ARM プロセッサ向けの GCC が必要です。
